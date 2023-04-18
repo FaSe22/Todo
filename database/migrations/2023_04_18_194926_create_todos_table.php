@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description');
             $table->enum('priority', ['LOW', 'MEDIUM', 'HIGH']);
             $table->enum('status', ['TODO', 'IN_PROGRESS', 'DONE']);
-            $table->date('due_date')->nullable;
+            $table->date('due_date')->nullable();
             $table->timestamps();
         });
     }
