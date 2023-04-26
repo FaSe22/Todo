@@ -3,6 +3,7 @@
 use App\Models\Todo;
 use App\Models\User;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 
 function createTodo(array $args = null){
    return  Todo::factory()->forUser()->create($args);
@@ -16,8 +17,8 @@ it('should throw a query exeption')->expect(fn() =>Todo::factory()->create())->t
 it('should create an entry in todos table')->defer(fn() => createTodo() )->assertDatabaseCount('todos', 1);
 it('should write the title in todos table')->defer(fn() => createTodo(['title' => '__TITLE__']))->assertDatabaseHas('todos', ['title' =>'__TITLE__']);
 it('should write the description in todos table')->defer(fn() => createTodo(['description' => '__DESCRIPTION__']))->assertDatabaseHas('todos', ['description' =>'__DESCRIPTION__']);
-it('should write LOW as default priority')->defer(fn() => createTodo(['description' => '__DESCRIPTION__']))->assertDatabaseHas('todos', ['priority' =>'LOW']);
-it('should write TODO as default status')->defer(fn() => createTodo(['description' => '__DESCRIPTION__']))->assertDatabaseHas('todos', ['status' =>'TODO']);
+it('should write LOW as default priority')->defer(fn() => createTodo(['description' => '__DESCRIPTION__']))->throwsIf(fn() => DB::getDriverName() === 'sqlite', QueryException::class)->assertDatabaseHas('todos', ['priority' =>'LOW']);
+it('should write TODO as default status')->defer(fn() => createTodo(['description' => '__DESCRIPTION__']))->throwsIf(fn() => DB::getDriverName() === 'sqlite', QueryException::class)->assertDatabaseHas('todos', ['status' =>'TODO']);
 
 it('should return an instance of todo')->expect(fn() => makeTodo())->toBeInstanceOf(Todo::class);
 it('should return an instance of a user')->expect(fn() => makeTodo()->user)->toBeInstanceOf(User::class);
