@@ -5,3 +5,7 @@ it('should be successful', function () {
 
     $response->assertStatus(200);
 });
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
