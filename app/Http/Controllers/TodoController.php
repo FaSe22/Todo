@@ -12,11 +12,7 @@ class TodoController extends Controller
      */
     public function index()
     {
-<<<<<<< Updated upstream
-        //1
-=======
         //
->>>>>>> Stashed changes
     }
 
     /**
