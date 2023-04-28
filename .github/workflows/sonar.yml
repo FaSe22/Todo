@@ -8,6 +8,8 @@ on:
 jobs:
   sonarcloud:
     name: SonarCloud
+    needs: laravel-tests
+    if: ${{ success() }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
