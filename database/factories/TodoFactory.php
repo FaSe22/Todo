@@ -20,6 +20,8 @@ class TodoFactory extends Factory
         return [
             'title' => fake()->sentence(5),
             'description' => fake()->sentence(15),
+            'priority' => "LOW",
+            'status' => "TODO"
         ];
     }
 
