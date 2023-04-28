@@ -24,7 +24,8 @@ jobs:
             
         - name: Install dependencies with composer
           run: composer update --no-ansi --no-interaction --no-progress
-          
+        - name: Copy .env
+          run: php -r "file_exists('.env') || copy('.env.example', '.env');"
         - name: Generate key
           run: php artisan key:generate
         - name: Directory Permissions
