@@ -18,6 +18,6 @@ class TodoSeeder extends Seeder
             ['priority' => 'LOW'],
             ['priority' => 'MEDIUM'],
             ['priority'=> 'HIGH']
-        ))->forUser()->create();
+        ))->forUser()->sequence(fn(Sequence $sequence) => ['due_date' => today()->subDays($sequence->index)])->create();
     }
 }
